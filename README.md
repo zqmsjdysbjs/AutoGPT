@@ -1,134 +1,91 @@
-# AutoGPT: Build & Use AI Agents
+# 德国站商详批量打开和Joybuy前端页面批量审阅工具
 
-[![Discord Follow](https://dcbadge.vercel.app/api/server/autogpt?style=flat)](https://discord.gg/autogpt) &ensp;
-[![Twitter Follow](https://img.shields.io/twitter/follow/Auto_GPT?style=social)](https://twitter.com/Auto_GPT) &ensp;
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+这是一个用于管理德国电商平台产品SKU和SPU的批量操作工具，支持自动化打开产品编辑页面和前端商品页面。
 
-**AutoGPT** is a powerful tool that lets you create and run intelligent agents. These agents can perform various tasks automatically, making your life easier.
+## 功能特性
 
-## How to Get Started
+### 1. 支配型SPU处理
+- **功能**: 1个SPU支配多个SKU，需要高亮特定SKU来定位编辑按钮
+- **处理方式**: 分批处理（每批最多10个），自动检索和高亮SKU
+- **示例**: iPad mini 2024 256GB Wi-Fi and Cel.
 
-https://github.com/user-attachments/assets/8508f4dc-b362-4cab-900f-644964a96cdf
+### 2. 非支配型SPU处理
+- **功能**: 1个SPU单独对应1个SKU，直接打开页面即可
+- **处理方式**: 批量一次性打开所有页面
+- **示例**: Logitech G29 Gaming Driving Force racing wheel
 
-### 🧱 AutoGPT Builder 
+### 3. 前端商品页面审阅
+- **功能**: 批量打开Joybuy前端商品页面进行审阅
+- **URL格式**: https://www.joybuy.de/dp/{SKU}
 
-The AutoGPT Builder is the frontend. It allows you to design agents using an easy flowchart style. You build your agent by connecting blocks, where each block performs a single action. It's simple and intuitive!
+## 安装依赖
 
-[Read this guide](https://docs.agpt.co/server/new_blocks/) to learn how to build your own custom blocks.
-
-### 💽 AutoGPT Server
-
-The AutoGPT Server is the backend. This is where your agents run. Once deployed, agents can be triggered by external sources and can operate continuously.
-
-### 🐙 Example Agents
-
-Here are two examples of what you can do with AutoGPT:
-
-1. **Reddit Marketing Agent**
-   - This agent reads comments on Reddit.
-   - It looks for people asking about your product.
-   - It then automatically responds to them.
-
-2. **YouTube Content Repurposing Agent**
-   - This agent subscribes to your YouTube channel.
-   - When you post a new video, it transcribes it.
-   - It uses AI to write a search engine optimized blog post.
-   - Then, it publishes this blog post to your Medium account.
-
-These examples show just a glimpse of what you can achieve with AutoGPT!
-
----
-Our mission is to provide the tools, so that you can focus on what matters:
-
-- 🏗️ **Building** - Lay the foundation for something amazing.
-- 🧪 **Testing** - Fine-tune your agent to perfection.
-- 🤝 **Delegating** - Let AI work for you, and have your ideas come to life.
-
-Be part of the revolution! **AutoGPT** is here to stay, at the forefront of AI innovation.
-
-**📖 [Documentation](https://docs.agpt.co)**
-&ensp;|&ensp;
-**🚀 [Contributing](CONTRIBUTING.md)**
-
-
----
-## 🤖 AutoGPT Classic
-> Below is information about the classic version of AutoGPT.
-
-**🛠️ [Build your own Agent - Quickstart](classic/FORGE-QUICKSTART.md)**
-
-### 🏗️ Forge
-
-**Forge your own agent!** &ndash; Forge is a ready-to-go toolkit to build your own agent application. It handles most of the boilerplate code, letting you channel all your creativity into the things that set *your* agent apart. All tutorials are located [here](https://medium.com/@aiedge/autogpt-forge-e3de53cc58ec). Components from [`forge`](/classic/forge/) can also be used individually to speed up development and reduce boilerplate in your agent project.
-
-🚀 [**Getting Started with Forge**](https://github.com/Significant-Gravitas/AutoGPT/blob/master/classic/forge/tutorials/001_getting_started.md) &ndash;
-This guide will walk you through the process of creating your own agent and using the benchmark and user interface.
-
-📘 [Learn More](https://github.com/Significant-Gravitas/AutoGPT/tree/master/classic/forge) about Forge
-
-### 🎯 Benchmark
-
-**Measure your agent's performance!** The `agbenchmark` can be used with any agent that supports the agent protocol, and the integration with the project's [CLI] makes it even easier to use with AutoGPT and forge-based agents. The benchmark offers a stringent testing environment. Our framework allows for autonomous, objective performance evaluations, ensuring your agents are primed for real-world action.
-
-<!-- TODO: insert visual demonstrating the benchmark -->
-
-📦 [`agbenchmark`](https://pypi.org/project/agbenchmark/) on Pypi
-&ensp;|&ensp;
-📘 [Learn More](https://github.com/Significant-Gravitas/AutoGPT/blob/master/benchmark) about the Benchmark
-
-### 💻 UI
-
-**Makes agents easy to use!** The `frontend` gives you a user-friendly interface to control and monitor your agents. It connects to agents through the [agent protocol](#-agent-protocol), ensuring compatibility with many agents from both inside and outside of our ecosystem.
-
-<!-- TODO: insert screenshot of front end -->
-
-The frontend works out-of-the-box with all agents in the repo. Just use the [CLI] to run your agent of choice!
-
-📘 [Learn More](https://github.com/Significant-Gravitas/AutoGPT/tree/master/classic/frontend) about the Frontend
-
-### ⌨️ CLI
-
-[CLI]: #-cli
-
-To make it as easy as possible to use all of the tools offered by the repository, a CLI is included at the root of the repo:
-
-```shell
-$ ./run
-Usage: cli.py [OPTIONS] COMMAND [ARGS]...
-
-Options:
-  --help  Show this message and exit.
-
-Commands:
-  agent      Commands to create, start and stop agents
-  benchmark  Commands to start the benchmark and list tests and categories
-  setup      Installs dependencies needed for your system.
+```bash
+pip install -r requirements.txt
 ```
 
-Just clone the repo, install dependencies with `./run setup`, and you should be good to go!
+## 数据文件要求
 
-## 🤔 Questions? Problems? Suggestions?
+工具需要以下Excel文件（放在脚本同目录下）：
 
-### Get help - [Discord 💬](https://discord.gg/autogpt)
+1. **重复SPU_结果.xlsx** - 包含支配型SPU列表
+   - A列第2行开始：SPU编号（仅数字）
 
-[![Join us on Discord](https://invidget.switchblade.xyz/autogpt)](https://discord.gg/autogpt)
+2. **SKU_SPU.xlsx** - SKU到SPU的映射表
+   - 首列：SKU编号
+   - 次列：SPU编号
 
-To report a bug or request a feature, create a [GitHub Issue](https://github.com/Significant-Gravitas/AutoGPT/issues/new/choose). Please ensure someone else hasn’t created an issue for the same topic.
+## 使用方法
 
-## 🤝 Sister projects
+### 1. 启动工具
+```bash
+python german_product_tool.py
+```
 
-### 🔄 Agent Protocol
+### 2. 操作流程
+1. 在"商详查询-SKU列表"输入框中输入SKU（每行一个，最多50个）
+2. 在"前端检索-SKU列表"输入框中输入前端SKU（每行一个，最多50个）
+3. 按顺序点击操作按钮：
+   - 按钮1：分批打开支配型SPU编辑界面
+   - 按钮2：批量打开非支配型SPU编辑界面
+   - 按钮3：打开Joybuy前端商品页面
 
-To maintain a uniform standard and ensure seamless compatibility with many current and future applications, AutoGPT employs the [agent protocol](https://agentprotocol.ai/) standard by the AI Engineer Foundation. This standardizes the communication pathways from your agent to the frontend and benchmark.
+### 3. 注意事项
+- 优先处理支配型SPU
+- 处理支配型SPU时不要移动鼠标和键盘
+- 支持表格数据批量粘贴
+- 最多处理50个SKU
 
----
+## Chrome快捷键
 
-<p align="center">
-<a href="https://star-history.com/#Significant-Gravitas/AutoGPT">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Significant-Gravitas/AutoGPT&type=Date&theme=dark" />
-    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=Significant-Gravitas/AutoGPT&type=Date" />
-    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=Significant-Gravitas/AutoGPT&type=Date" />
-  </picture>
-</a>
-</p>
+- `End`: 到页面最下方
+- `Tab`: 到页面最上方
+- `Ctrl+Tab`: 下一页
+- `Ctrl+Shift+Tab`: 上一页
+- `Ctrl+W`: 关闭页面
+
+## 系统要求
+
+- Python 3.6+
+- Google Chrome浏览器
+- Windows/macOS/Linux支持
+
+## 技术特性
+
+- 跨平台Chrome启动支持
+- 自动窗口识别和激活
+- 批量URL生成和打开
+- 智能等待时间优化
+- 线程化处理避免UI阻塞
+- 错误处理和状态提示
+
+## 文件结构
+
+```
+├── german_product_tool.py    # 主程序文件
+├── requirements.txt          # 依赖包列表
+├── README.md                # 说明文档
+├── 重复SPU_结果.xlsx        # 支配型SPU数据文件
+├── SKU_SPU.xlsx            # SKU-SPU映射文件
+└── id_T_HwOLT_1757043427406.ico  # 程序图标（可选）
+```
