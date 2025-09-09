@@ -1,0 +1,6 @@
+tkinter
+pandas
+pygetwindow
+pyautogui
+pyperclip
+openpyxl
